@@ -1,6 +1,4 @@
 <launch>
-  <arg name="current_max" default="1000"/>
-  <node name="mightex_controller_node" pkg="mightex_controller" type="mightex_controller_node.py">
-    <param name="current_max" value="$(arg current_max)"/>
+  <node name="tone_controller_node" pkg="tone_controller" type="tone_controller_node.py">
   </node>
 </launch>

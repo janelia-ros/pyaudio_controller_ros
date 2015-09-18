@@ -3,6 +3,7 @@
 #
 from __future__ import print_function,division
 
+import math
 import pyaudio
 
 import rospy
@@ -15,34 +16,40 @@ class ToneController(object):
         rospy.loginfo('Initializing tone_controller_node...')
         self._initialized = False
 
-        self._cmd_current_sub = rospy.Subscriber('~cmd_current',CmdCurrent,self._cmd_current_callback)
-        self._cmd_off_sub = rospy.Subscriber('~cmd_off',CmdChannel,self._cmd_off_callback)
+        self._cmd_tone_sub = rospy.Subscriber('~cmd_tone',CmdTone,self._cmd_tone_callback)
 
-        current_max = rospy.get_param('~current_max')
-        self._dev = ToneDevice()
-        self._channel_count = self._dev.get_channel_count()
-        for channel in range(self._channel_count):
-            channel += 1
-            self._dev.set_normal_parameters(channel,current_max,1)
+        rospy.on_shutdown(self._shutdown)
+        self._pyaudio = pyaudio.PyAudio()
+        self._bitrate = 16000 #number of frames per second/frameset.
+        self._stream =  self._pyaudio.open(format=self._pyaudio.get_format_from_width(1),
+                                           channels=1,
+                                           rate=self._bitrate,
+                                           output=True)
         rospy.loginfo('tone_controller_node initialized!')
         self._initialized = True
 
+    def _shutdown():
+        self._stream.stop_stream()
+        self._stream.close()
+        self._pyaudio.terminate()
+
     def _cmd_current_callback(self,data):
         if self._initialized:
-            channel = data.channel
-            current = data.current
-            if (channel >= 1) and (channel <= self._channel_count):
-                if current > 0:
-                    self._dev.set_normal_current(channel,current)
-                    self._dev.set_mode_normal(channel)
-                else:
-                    self._dev.set_mode_disable(channel)
+            frequency = data.frequency
+            duration = data.duration
+            length = duration/1000
+            frame_count = int(self._bitrate*length)
+            restframes = frame_count % self._bitrate
+            wavedata = ''
 
-    def _cmd_off_callback(self,data):
-        if self._initialized:
-            channel = data.channel
-            if (channel >= 1) and (channel <= self._channel_count):
-                self._dev.set_mode_disable(channel)
+            for x in xrange(frame_count):
+                wavedata = wavedata+chr(int(math.sin(x/((self._bitrate/frequency)/math.pi))*127+128))
+
+            #fill remainder of frameset with silence
+            for x in xrange(restframes):
+                wavedata = wavedata+chr(128)
+
+            self._stream.write(wavedata)
 
 
 if __name__ == '__main__':
