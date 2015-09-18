@@ -33,7 +33,7 @@ class ToneController(object):
         self._stream.close()
         self._pyaudio.terminate()
 
-    def _cmd_current_callback(self,data):
+    def _cmd_tone_callback(self,data):
         if self._initialized:
             frequency = data.frequency
             duration = data.duration
