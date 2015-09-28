@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(tone_controller)
+project(pyaudio_controller)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -49,7 +49,7 @@ roslaunch_add_file_check(launch)
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  CmdTone.msg
+  PlayTone.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -103,7 +103,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES tone_controller
+#  LIBRARIES pyaudio_controller
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -117,21 +117,21 @@ catkin_package(
 # include_directories(include)
 
 ## Declare a C++ library
-# add_library(tone_controller
-#   src/${PROJECT_NAME}/tone_controller.cpp
+# add_library(pyaudio_controller
+#   src/${PROJECT_NAME}/pyaudio_controller.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(tone_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(pyaudio_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(tone_controller_node src/tone_controller_node.cpp)
+# add_executable(pyaudio_controller_node src/pyaudio_controller_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(tone_controller_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(pyaudio_controller_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 include_directories(
@@ -153,7 +153,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS tone_controller tone_controller_node
+# install(TARGETS pyaudio_controller pyaudio_controller_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -178,7 +178,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_tone_controller.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_pyaudio_controller.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

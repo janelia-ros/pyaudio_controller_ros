@@ -1,5 +1,4 @@
-tone_controller_ros
-===================
+#pyaudio_controller_ros
 
 Authors:
 
@@ -15,9 +14,9 @@ License:
 Connect speakers.
 
 ```shell
-roslaunch tone_controller tone_controller.launch
+roslaunch pyaudio_controller pyaudio_controller.launch
 ```
 
 ```shell
-rostopic pub -1 /tone_controller_node/cmd_tone tone_controller/CmdTone -- 3000 500
+rostopic pub -1 /pyaudio_controller_node/play_tone pyaudio_controller/PlayTone -- 3000 500
 ```

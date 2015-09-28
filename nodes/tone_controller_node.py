@@ -8,15 +8,15 @@ import pyaudio
 
 import rospy
 
-from tone_controller.msg import CmdTone
+from pyaudio_controller.msg import PlayTone
 
 
-class ToneController(object):
+class PyaudioController(object):
     def __init__(self,*args,**kwargs):
-        rospy.loginfo('Initializing tone_controller_node...')
+        rospy.loginfo('Initializing pyaudio_controller_node...')
         self._initialized = False
 
-        self._cmd_tone_sub = rospy.Subscriber('~cmd_tone',CmdTone,self._cmd_tone_callback)
+        self._cmd_pyaudio_sub = rospy.Subscriber('~play_tone',PlayTone,self._play_tone_callback)
 
         rospy.on_shutdown(self._shutdown)
         self._pyaudio = pyaudio.PyAudio()
@@ -25,7 +25,7 @@ class ToneController(object):
                                            channels=1,
                                            rate=self._bitrate,
                                            output=True)
-        rospy.loginfo('tone_controller_node initialized!')
+        rospy.loginfo('pyaudio_controller_node initialized!')
         self._initialized = True
 
     def _shutdown():
@@ -33,7 +33,7 @@ class ToneController(object):
         self._stream.close()
         self._pyaudio.terminate()
 
-    def _cmd_tone_callback(self,data):
+    def _play_tone_callback(self,data):
         if self._initialized:
             frequency = data.frequency
             duration = data.duration
@@ -54,8 +54,8 @@ class ToneController(object):
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('tone_controller_node')
-        tc = ToneController()
+        rospy.init_node('pyaudio_controller_node')
+        tc = PyaudioController()
         rospy.spin()
     except rospy.ROSInterruptException:
         pass

@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>tone_controller</name>
+  <name>pyaudio_controller</name>
   <version>0.0.0</version>
-  <description>The tone_controller package</description>
+  <description>The pyaudio_controller package</description>
 
   <maintainer email="polidorop@janelia.hhmi.org">Peter Polidoro</maintainer>
 
   <license>BSD</license>
 
-  <url type="website">https://github.com/janelia-ros/tone_controller_ros</url>
-  <url type="bugtracker">https://github.com/janelia-ros/tone_controller_ros/issues</url>
-  <url type="repository">https://github.com/janelia-ros/tone_controller_ros</url>
+  <url type="website">https://github.com/janelia-ros/pyaudio_controller_ros</url>
+  <url type="bugtracker">https://github.com/janelia-ros/pyaudio_controller_ros/issues</url>
+  <url type="repository">https://github.com/janelia-ros/pyaudio_controller_ros</url>
 
   <author email="polidorop@janelia.hhmi.org">Peter Polidoro</author>
 

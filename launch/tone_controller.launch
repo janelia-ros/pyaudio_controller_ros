@@ -1,4 +1,4 @@
 <launch>
-  <node name="tone_controller_node" pkg="tone_controller" type="tone_controller_node.py">
+  <node name="pyaudio_controller_node" pkg="pyaudio_controller" type="pyaudio_controller_node.py">
   </node>
 </launch>
