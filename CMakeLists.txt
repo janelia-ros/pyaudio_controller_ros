@@ -49,7 +49,7 @@ roslaunch_add_file_check(launch)
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  PlayTone.msg
+  Tone.msg
 )
 
 ## Generate services in the 'srv' folder

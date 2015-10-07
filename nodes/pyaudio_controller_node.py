@@ -8,7 +8,7 @@ import pyaudio
 
 import rospy
 
-from pyaudio_controller.msg import PlayTone
+from pyaudio_controller.msg import Tone
 
 
 class PyaudioController(object):
@@ -16,7 +16,7 @@ class PyaudioController(object):
         rospy.loginfo('Initializing pyaudio_controller_node...')
         self._initialized = False
 
-        self._cmd_pyaudio_sub = rospy.Subscriber('~play_tone',PlayTone,self._play_tone_callback)
+        self._cmd_pyaudio_sub = rospy.Subscriber('~play_tone',Tone,self._play_tone_callback)
 
         rospy.on_shutdown(self._shutdown)
         self._pyaudio = pyaudio.PyAudio()
