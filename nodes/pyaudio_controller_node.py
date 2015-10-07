@@ -43,7 +43,10 @@ class PyaudioController(object):
             wavedata = ''
 
             for x in xrange(frame_count):
-                wavedata = wavedata+chr(int(math.sin(x/((self._bitrate/frequency)/math.pi))*127+128))
+                try:
+                    wavedata = wavedata+chr(int(math.sin(x/((self._bitrate/frequency)/math.pi))*127+128))
+                except ZeroDivisionError:
+                    wavedata = chr(128)
 
             #fill remainder of frameset with silence
             for x in xrange(restframes):
